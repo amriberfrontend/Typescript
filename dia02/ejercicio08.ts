@@ -45,7 +45,7 @@ const marie = new Ejecutivo("Marie Batel", 20);
 const pelia = new Secretario("Pelia", 20);
 const joseph = new Secretario("Joseph M'benga", 22);
 
-const montgomery = new Aprendiz("Montgomery Scot", 22);
+const montgomery = new Aprendiz("Montgomery Scott", 22);
 const christine = new Aprendiz("Christine Chapel", 24);
 
 const plantilla: Persona[] = [christopher, marie, pelia, joseph, montgomery, christine];
