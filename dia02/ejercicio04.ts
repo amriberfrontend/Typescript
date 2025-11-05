@@ -1,3 +1,4 @@
+//* Sé que es un poco tonto hacer herencia para esto, pero me apetecía probar.
 class Shape {
     positionX: number;
     positionY: number;
