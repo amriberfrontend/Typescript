@@ -37,8 +37,11 @@ class Persona {
     }
 }
 
-const persona = new Persona("Angel", 1.64, 90);
-console.log("AVISO: El IMC es un sistema muy desfasado que no diferencia entre grasa y densidad muscular. Tampoco tiene en cuenta nuestro entendimiento moderno de bien estar.");
+const persona = new Persona("Angel", 1.64, 80);
+console.log("AVISO: El IMC es un sistema muy desfasado, no coincide con observaciones modernas de la psycología y la nutrición.");
+console.log("IMPORTANTE: El IMC no diferencia entre grasa y densidad muscular.")
 console.log(`Sujeto: ${persona.nombre}`);
+console.log(`Altura: ${persona.altura} m`);
+console.log(`Peso: ${persona.peso} kg`);
 console.log(`Calificación: ${persona.getBMICategory()}`);
 console.log(`Total IMC: ${persona.getBMI()}`);
