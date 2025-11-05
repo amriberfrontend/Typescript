@@ -7,7 +7,9 @@ class Punto{
         this.y = y;
         this.color = color;
     }
-    
+    toString(): string {
+        return `x=${this.x}, y=${this.y}, color=${this.color}`
+    }
 }
 
 const miPrimerPunto = new Punto(4, 5, "rojo");
@@ -16,4 +18,4 @@ miPrimerPunto.x = 50;
 miPrimerPunto.y = 25;
 miPrimerPunto.color = "verde"
 
-console.log(`x=${miPrimerPunto.x}, y=${miPrimerPunto.y}, color=${miPrimerPunto.color}`);
+console.log(miPrimerPunto.toString());
