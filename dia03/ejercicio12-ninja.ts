@@ -63,9 +63,6 @@ class SteelArmor implements IArmor {
 }
 
 
-
-
-
 enum NinjaType {
     GENIN,
     CHUNIN,
