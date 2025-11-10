@@ -24,13 +24,13 @@ const nombres02 = [
     {nombre: "Tanit", descripcion: ""}
 ]
 
-function mostrarNombres(nombres) {
-    for (const nombre of nombresJuntos) {
+function mostrarNombres(nombres: {nombre:string, descripcion: string}[]) {
+    for (const nombre of nombres) {
         console.log(nombre.nombre);
     }
 }
 
-function comprobarLongitud(nombre01): boolean {
+function comprobarLongitud(nombre01: {nombre:string, descripcion: string}): boolean {
     return nombre01.nombre.length > 2
 }
 
@@ -38,7 +38,7 @@ function comprobarMasDe6(nombre01: {nombre:string, descripcion: string}): boolea
     return nombre01.nombre.length > 6
 }
 
-function filtrarPorI(nombre01): boolean {
+function filtrarPorI(nombre01: {nombre:string, descripcion: string}): boolean {
     const nombreString: string = nombre01.nombre;
     return nombreString.toLowerCase().localeCompare('i') > 0;
 }
@@ -55,6 +55,10 @@ function runningTotal(total: number, num: number) {
     return total + num;
 }
 
+function ordernarPorNombre(nombre1: {nombre: string, descripcion: string}, nombre2: {nombre: string, descripcion: string}): number {
+    return nombre1.nombre.localeCompare(nombre2.nombre)
+}
+
 
 
 console.log("=== Juntar nombres ===");
@@ -67,13 +71,8 @@ console.log(nombres01.every(comprobarLongitud));
 console.log("\n=== Mostrar los mayores a 'i' ===")
 let nombres01Filtrados = nombres01.filter(filtrarPorI);
 let nombres02Filtrados = nombres02.filter(filtrarPorI);
-for (const nombre of nombres01Filtrados) {
-    console.log(nombre.nombre);
-}
-for (const nombre of nombres02Filtrados) {
-    console.log(nombre.nombre);
-}
-
+mostrarNombres(nombres01Filtrados);
+mostrarNombres(nombres02Filtrados);
 console.log("\n=== Palíndromos ===");
 const palindromos01 = palindromo(nombres01);
 const palindromos02 = palindromo(nombres02);
@@ -127,9 +126,7 @@ const nombres01Recortado = nombres01.slice(1,7);
 const nombres02Recortado = nombres02.slice(4,6);
 
 const nombresJuntosRecortados = nombres01Recortado.concat(nombres02Recortado);
-for (const nombre of nombresJuntosRecortados) {
-    console.log(nombre.nombre);
-}
+mostrarNombres(nombresJuntosRecortados);
 
 
 
@@ -137,8 +134,18 @@ console.log("\n=== ¿>6 caracteres? ===")
 console.log(`nombres01 tiene al menos un elemento con 6 characteres: ${nombres01.some(comprobarMasDe6)}`);
 console.log(`nombres02 tiene al menos un elemento con 6 characteres: ${nombres02.some(comprobarMasDe6)}`);
 
+console.log("\n=== Ordenados alfabéticamente ===");
+nombres01.sort(ordernarPorNombre);
+nombres02.sort(ordernarPorNombre);
+console.log("- Nombres 01 -");
+mostrarNombres(nombres01);
+console.log("- Nombres 02 -");
+mostrarNombres(nombres02);
 
-nombres01.sort()
-nombres02.sort()
+console.log("\n=== Invertidos ===");
 nombres01.reverse()
 nombres02.reverse()
+console.log("- Nombres 01 -");
+mostrarNombres(nombres01);
+console.log("- Nombres 02 -");
+mostrarNombres(nombres02);
