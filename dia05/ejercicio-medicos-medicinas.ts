@@ -38,6 +38,17 @@ class PacienteHospitalizado extends Paciente {
     }
 
     mostrarInfo(): string {
-        return super.mostrarInfo() + `, Dias Hospitalizado: `
+        return super.mostrarInfo() + `, Dias Hospitalizado: ${this.diasHospitalizado}, Diagnóstico: ${this.diagnostico}`;
     }
 }
+
+const paciente1 = new Paciente("Ana Gómez", 29, "12345678A");
+const paciente2 = new PacienteConsulta("Luis Pérez", 45, "87654321B", "Cardiología");
+const paciente3 = new PacienteConsulta("María López", 32, "11223344C", "Dermatología");
+const paciente4 = new PacienteHospitalizado("Carlos Ruiz", 60, "44332211D", 7, "Neumonía");
+
+const pacientes: Paciente[] = [paciente1, paciente2, paciente3, paciente4];
+
+pacientes.forEach(paciente => {
+    console.log(paciente.mostrarInfo());
+});
