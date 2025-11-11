@@ -24,6 +24,8 @@ const nombres02 = [
     {nombre: "Tanit", descripcion: `Este nombre raro para niña es de origen fenicio. Tanit hace referencia a la diosa más importante de la mitología cartaginesa.`}
 ];
 
+
+
 function mostrarNombres(nombres: {nombre:string, descripcion: string}[]) {
     for (const nombre of nombres) {
         console.log(nombre.nombre);
