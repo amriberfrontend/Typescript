@@ -9,7 +9,7 @@ class Coche implements IValorable {
     volante: Volante;
     precio: number;
 
-    constructor(id: string, ruedas: Rueda[], carroceria: Carroceria, volante: Volante, precio: number)  {
+    constructor(id: string, ruedas: Rueda[], carroceria: Carroceria, volante: Volante, precio: number) {
         this.id = id;
         this.ruedas = ruedas;
         this.carroceria = carroceria;
@@ -104,22 +104,24 @@ const volante2 = new Volante("v2", 300);
 // create 3 bodies
 const carroceria1 = new Carroceria("c1", 2000, "rojo");
 const carroceria2 = new Carroceria("c2", 2200, "azul");
-const carroceria3 = new Carroceria("c3", 2100, "negro");
+const carroceria3 = new Carroceria("c3", 2100, 'negro');
 
 // create 1 car using the 4 ruedas, one carroceria and one volante rueda
 const coche1 = new Coche(
-    "coche1", 
-    [rueda1, rueda2, rueda3, rueda4], 
-    carroceria1, 
-    volante1, 
+    "coche1",
+    [rueda1, rueda2, rueda3, rueda4],
+    carroceria1,
+    volante1,
     15000
 );
 
 // create dealership and add the items
 const concesionario = new Concesionario(
-    "c/ Principal, 123",
+    'c/ Principal, 123',
     [coche1, rueda1, rueda2, rueda3, rueda4, carroceria1, carroceria2, carroceria3, volante1, volante2]
 );
 
 // optional: show total inventory precio
 console.log("Precio total concesionario: " + concesionario.damePrecio());
+
+console.log(concesionario.direccion);

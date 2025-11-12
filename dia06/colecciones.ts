@@ -1,29 +1,27 @@
-interface ICadenable
-{
-    TodosLosElementosMayorQue(numeroCaracteres : number) : Boolean
-    AlgunoDeLosElementosMayorQue(numeroCaracteres:  number): Boolean
+interface ICadenable {
+    TodosLosElementosMayorQue(numeroCaracteres: number): boolean
+    AlgunoDeLosElementosMayorQue(numeroCaracteres: number): boolean
     MuestraContenidoArray(): void
-    FiltraPorPrimeraLetra(letra: string):string[]
+    FiltraPorPrimeraLetra(letra: string): string[]
     InvierteCadenas(): string[]
-    IndiceDeElemento(elemento: string):number
+    IndiceDeElemento(elemento: string): number
     ConcatenaElementosConComa(): string
     ArrayConLongitudDeLosElementos(): number[]
     EliminarUltimoElemento(): void;
     AñadirNuevoElemento(elemento: string): void
-    RunningTotalsSobreLaLongitudDeLosElementos():number
+    RunningTotalsSobreLaLongitudDeLosElementos(): number
     DameRebanadaDeArray(indiceInicial: number, indiceFinal: number): string[]
-    AñadirNuevosElementosAlArray(cadenas :string[]):void
+    AñadirNuevosElementosAlArray(cadenas: string[]): void
     Ordenar(): void
     OrdenarInvertido(): void
 }
-class ProcesoCadenasV01 implements ICadenable
-{
+class ProcesoCadenasV01 implements ICadenable {
     private elementos: string[];
 
     constructor(elementos: string[]) {
         this.elementos = elementos;
     }
-    AlgunoDeLosElementosMayorQue(numeroCaracteres: number): Boolean {
+    AlgunoDeLosElementosMayorQue(numeroCaracteres: number): boolean {
         return this.elementos.some(el => el.length > numeroCaracteres);
     }
     AñadirNuevosElementosAlArray(cadenas: string[]): void {
@@ -47,7 +45,7 @@ class ProcesoCadenasV01 implements ICadenable
             console.log('Elemento no válido para añadir.');
         }
     }
-    
+
     EliminarUltimoElemento(): void {
         if (this.elementos.length > 0) {
             this.elementos.pop();
@@ -98,11 +96,11 @@ class ProcesoCadenasV01 implements ICadenable
             console.log(`  [${idx}] ${el}`);
         });
     }
-    
-    TodosLosElementosMayorQue(numeroCaracteres: number): Boolean {
+
+    TodosLosElementosMayorQue(numeroCaracteres: number): boolean {
         return this.elementos.every(el => el.length > numeroCaracteres);
     }
-    
+
     Ordenar(): void {
         if (!this.elementos || this.elementos.length === 0) return;
         this.elementos.sort((elemento1, elemento2) => {
@@ -117,49 +115,44 @@ class ProcesoCadenasV01 implements ICadenable
     }
 }
 
-class Nombre {
-    readonly gestorDeCadenas: ICadenable;
-    constructor(gestor: ICadenable) {
-        this.gestorDeCadenas = gestor;
-    }
+// class Nombre {
+//     readonly gestorDeCadenas: ICadenable;
+//     constructor(gestor: ICadenable) {
+//         this.gestorDeCadenas = gestor;
+//     }
 
-    mostrar(): void {
-        this.gestorDeCadenas.MuestraContenidoArray();
-    }
+//     mostrar(): void {
+//         this.gestorDeCadenas.MuestraContenidoArray();
+//     }
 
-    comprobarLongitudTodos(longitud: number): Boolean {
-        return this.gestorDeCadenas.TodosLosElementosMayorQue(longitud);
-    }
+//     comprobarLongitudTodos(longitud: number): boolean {
+//         return this.gestorDeCadenas.TodosLosElementosMayorQue(longitud);
+//     }
 
-    getMayorQue(letra: string): string[] {
-        return this.gestorDeCadenas.FiltraPorPrimeraLetra(letra);
-    }
+//     getMayorQue(letra: string): string[] {
+//         return this.gestorDeCadenas.FiltraPorPrimeraLetra(letra);
+//     }
 
-    comprobarLongitudAlguno(longitud: number): Boolean {
-        return this.gestorDeCadenas.AlgunoDeLosElementosMayorQue(longitud);
-    }
+//     comprobarLongitudAlguno(longitud: number): boolean {
+//         return this.gestorDeCadenas.AlgunoDeLosElementosMayorQue(longitud);
+//     }
 
 
 
-}
+// }
 
-class Padron
-{
-    readonly GestorDeCadenas :ICadenable;
-    constructor(Gestor :ICadenable)
-    {
+class Padron {
+    readonly GestorDeCadenas: ICadenable;
+    constructor(Gestor: ICadenable) {
         this.GestorDeCadenas = Gestor;
     }
-    DamePadron():string[]
-    {
-        return this.GestorDeCadenas.DameRebanadaDeArray(1,3);
+    DamePadron(): string[] {
+        return this.GestorDeCadenas.DameRebanadaDeArray(1, 3);
     }
 }
 
-let PadronZaragoza = new Padron(new ProcesoCadenasV01(["Pepe","Juan","Ana"]));
+const PadronZaragoza = new Padron(new ProcesoCadenasV01(["Pepe", "Juan", "Ana"]));
 PadronZaragoza.DamePadron();
-
-
 
 
 
