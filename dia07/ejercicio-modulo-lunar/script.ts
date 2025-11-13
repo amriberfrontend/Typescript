@@ -1,181 +1,214 @@
-enum GrupoMinerales {
-    IGNEAS,
-    METAMORFICAS,
-    SEDIMENTARIAS
-}
-
-enum ClasificacionTamanyoGranos {
-    MUY_GRUESO,
-    GRUESO,
-    MEDIO,
-    FINO
-}
-
-enum ClasificacionUso {
-    CONSTRUCCION,
-    ORNAMENTAL,
-    UTENSILIOS,
-    MACHACAR
-}
-
-enum Textura {
-    VITREA,
-    AFANITICA,
-    FANERITICA
-}
+const Origen: string[] = ["Ígneas", "Metamórficas", "Sedimentarias"];
+const TamanyoGrano: string[] = ["Muy grueso", "Grueso", "Medio", "Fino"];
+const Clasificacion: string[] = ["Construcción", "Ornamental", "Utensilios", "Machacada"];
+const Textura: string[] = ["Vitrea", "Afanítica", "Fanerítica"];
 
 
+let entradaReducida: boolean = false;
+const mineralForm = <HTMLFormElement> document.getElementById("mineral-form");
+const toggleLayoutBtn = <HTMLButtonElement> document.getElementById("toggle-layout");
 
-class Mineral {
-    id: string;
-    nombre: string;
-    grupo: GrupoMinerales;
-    dureza: number;
-    tamanyoGranos: number;
-    clasificacionTamanyoGranos: ClasificacionTamanyoGranos;
-    clasificacion: ClasificacionUso;
-    temperaturaFormacion: number;
-    estructura: string;
-    formaGranos: string;
-    textura: Textura;
-
-    constructor(
-        id: string,
-        nombre: string,
-        grupo: GrupoMinerales,
-        dureza: number,
-        tamanyoGranos: number,
-        clasificacionTamanyoGranos: ClasificacionTamanyoGranos,
-        clasificacion: ClasificacionUso,
-        temperaturaFormacion: number,
-        estructura: string,
-        formaGranos: string,
-        textura: Textura
-    ) {
-        this.id = id;
-        this.nombre = nombre;
-        this.grupo = grupo;
-        this.dureza = dureza;
-        this.tamanyoGranos = tamanyoGranos;
-        this.clasificacionTamanyoGranos = clasificacionTamanyoGranos;
-        this.clasificacion = clasificacion;
-        this.temperaturaFormacion = temperaturaFormacion;
-        this.estructura = estructura;
-        this.formaGranos = formaGranos;
-        this.textura = textura;
+toggleLayoutBtn.addEventListener("click", function() {
+    entradaReducida = !entradaReducida;
+    if (entradaReducida) {
+        generarFormularioReducido(fields);
+    } else {
+        generarFormularioExtendido(fields);
     }
-
-}
-
-
-// Formato de la entrada de datos
-interface IMostrable {
-    dameAnchuraLabel(): number;
-    dameAnchuraInput(): number;
-    mostrarPlaceholder(): boolean;
-}
-
-class LayoutExtendido implements IMostrable {
-    readonly anchuraLabel: number = 3;
-    readonly anchuraInput: number = 9;
-    readonly placeholder: boolean = false;
-    dameAnchuraLabel(): number {
-        return this.anchuraLabel;
-    }
-    dameAnchuraInput(): number {
-        return this.anchuraInput;
-    }
-    mostrarPlaceholder(): boolean {
-        return this.placeholder;
-    }
-}
-
-class LayoutReducido implements IMostrable {
-    readonly anchuraLabel: number = 0;
-    readonly anchuraInput: number = 6;
-    readonly placeholder: boolean = true;
-    dameAnchuraLabel(): number {
-        return this.anchuraLabel;
-    }
-    dameAnchuraInput(): number {
-        return this.anchuraInput;
-    }
-    mostrarPlaceholder(): boolean {
-        return this.placeholder;
-    }
-
-}
-
-const reducedLayout: boolean = false;
-
-const inputs = document.getElementsByClassName("input-container");
-const labels = document.getElementsByClassName("col-form-label");
-
-const toggleLayoutBtn = document.getElementById("toggle-layout");
-
-
-toggleLayoutBtn?.addEventListener("click", (e: Event) => {
-    e.preventDefault();
-    toggleLayout();
 });
 
-function toggleLayout() {
-    let layout: IMostrable;
-    if (reducedLayout) {
-        layout = new LayoutReducido();
-    } else {
-        layout = new LayoutExtendido();
-    }
+const fields: {id: string, label: string, type: string, values: number[] | string[]}[] = [
+    {id: "id-mineral", label: "ID del mineral", type: "text", values: []},
+    {id: "nombre-mineral", label: "Nombre del mineral", type: "text", values: []},
+    {id: "grupo-mineral", label: "Grupo", type: "select", values: Origen},
+    {id: "dureza-mineral", label: "Dureza", type: "number", values: [0, 10]},
+    {id: "tamanyo-grano-mineral", label: "Tamaño del grano", type: "select", values: TamanyoGrano},
+    {id: "clasificacion-mineral", label: "Clasificación", type: "select", values: Clasificacion},
+    {id: "tamanyo-cristales-mineral", label: "Tamaño de los cristales", type: "number", values: [0, 10]},
+    {id: "temperatura-formacion-mineral", label: "Temperatura de formación", type: "number", values: [-100, 100]},
+    {id: "estructura-mineral", label: "Estructura", type: "textarea", values: []},
+    {id: "forma-granos-mineral", label: "Forma de los granos", type: "textarea", values: []},
+    {id: "textura-mineral", label: "Textura", type: "select", values: Textura}
+];
+generarFormularioExtendido(fields);
 
-    for (const label of labels) {
-        const idk = label.className.split(' ').filter(c => {
-            return c.lastIndexOf("col-3", 0) !== 0;
-        });
-        console.log(label.className);
-        
-    }
+interface ICapturable {}
 
+class Mineral implements ICapturable{
+    constructor(
+        public id: string,
+        public nombre: string,
+        public grupo: Origen,
+        public dureza: number,
+        public tamanyoGrano: TamanyoGrano,
+        public clasificacion: Clasificacion,
+        public tamanyoCristales: number,
+        public temperaturaFormacion: number,
+        public estructura: string,
+        public formaGranos: string,
+        public textura: Textura
+    ){}
+}
+
+interface IPiloto {
+    dameID(): string;
+    dameNombre(): string;
+    dameEdad(): number;
+}
+
+class Astronauta implements IPiloto {
+    id: string;
+    nombre: string;
+    edad: number;
+    constructor(id: string, nombre: string, edad: number) {
+        this.id = id;
+        this.nombre = nombre;
+        this.edad = edad;
+    }
+    dameID(): string {
+        return this.id;
+    }
+    dameNombre(): string {
+        return this.nombre;
+    }
+    dameEdad(): number {
+        return this.edad;
+    }
+    
 }
 
 
-// Comprobación de criterios
-/** 
- * Igneas
- * -------------
- * Grupo: igneas
- * Grano: grueso
- */
+function generarFormularioReducido(campos: {label: string, type: string, values: string[] | number[]}[]) {
+    mineralForm.innerHTML = "";
+    for (const campo of campos) {
+        const campoDiv = <HTMLDivElement> document.createElement("div");
+        campoDiv.classList.add("mb-3");
+        mineralForm.append(campoDiv);
 
-/**
- * Metamórficas
- * -------------------
- * Grupo: metamórfica
- * Grano: medio | fino
- * Textura: vitrea
- */
+        const inputDiv = <HTMLDivElement> document.createElement("div");
+        inputDiv.classList.add("col-9", "mx-auto", "mineral-form__input-container");
+        campoDiv.append(inputDiv);
 
-/**
- * Sedimentaria
- * -------------------
- * Grupo: sedimentaria
- * Textura: fanerítica
- */
+        switch (campo.type) {
+            case ("number"): {
+                const input = <HTMLInputElement> document.createElement("input");
+                input.classList.add("form-control");
+                input.setAttribute("type", "number");
+                input.setAttribute("placeholder", campo.label);
+                inputDiv.append(input);
+                if (campo.values.length > 0) {
+                    input.setAttribute("min", `${campo.values[0]}`);
+                    input.setAttribute("max", `${campo.values[1]}`);
+                }
+                break;
+            }
+            case ("select"): {
+                const input = <HTMLSelectElement> document.createElement("select");
+                input.classList.add("form-select");
+                input.setAttribute("placeholder", campo.label);
+                inputDiv.append(input);
+                const option = <HTMLOptionElement> document.createElement("option");
+                option.setAttribute("selected", "true");
+                option.textContent = `${campo.label}`;
+                input.append(option);
+                
+                for (let i = 0; i < campo.values.length; i++) {
+                    const option = <HTMLOptionElement> document.createElement("option");
+                    option.setAttribute("value", `${i}`);
+                    option.textContent = `${campo.values[i]}`;
+                    input.append(option);
+                }
+                break;
+            }
+            case ("textarea"): {
+                const input = <HTMLTextAreaElement> document.createElement("textarea");
+                input.classList.add("form-control");
+                input.setAttribute("placeholder", campo.label);
+                inputDiv.append(input);
+                break;
+            }
+            
+            default: {
+                const input = <HTMLInputElement> document.createElement("input");
+                input.classList.add("form-control");
+                input.setAttribute("type", campo.type);
+                input.setAttribute("placeholder", campo.label);
+                inputDiv.append(input);
+                break;
+            }
 
-// Mostrar resultado de comprobación de criterios
+        }
 
-// Mostrar resultados en formato inglés y europeo
+    }
+}
 
-/**
- * Inglés
- * -------------------
- * Textos en inglés
- * Grados en Farenheit
- */
+function generarFormularioExtendido(campos: {label: string, type: string, values: string[] | number[]}[]) {
+    mineralForm.innerHTML = "";
+    for (const campo of campos) {
+        const labelText = campo.label;
+        const campoDiv = <HTMLDivElement> document.createElement("div");
+        campoDiv.classList.add("mb-3", "row");
+        mineralForm.append(campoDiv);
 
+        const label = <HTMLLabelElement> document.createElement("label");
+        label.classList.add("col-3", "col-form-label", "text-end", "mineral-form__label")
+        label.textContent = labelText;
+        campoDiv.append(label);
 
-/**
- * Europeo
- * -----------------
- * Textos en español
- * Grados en Celsius
- */
+        
+
+    }
+}
+
+function generarInput(campo: {label: string, type: string, values: string[] | number[]}, placeholderText: string = ""): HTMLElement {
+    
+
+    const inputDiv = <HTMLDivElement> document.createElement("div");
+    inputDiv.classList.add("col-9", "mineral-form__input-container");
+
+    switch (campo.type) {
+        case ("number"): {
+            const input = <HTMLInputElement> document.createElement("input");
+            input.classList.add("form-control");
+            input.setAttribute("type", "number");
+            input.setAttribute("placeholder", placeholderText);
+            inputDiv.append(input);
+            if (campo.values.length > 0) {
+                input.setAttribute("min", `${campo.values[0]}`);
+                input.setAttribute("max", `${campo.values[1]}`);
+            }
+            break;
+        }
+        case ("select"): {
+            const input = <HTMLSelectElement> document.createElement("select");
+            input.classList.add("form-select");
+            input.setAttribute("placeholder", placeholderText);
+            inputDiv.append(input);
+            for (let i = 0; i < campo.values.length; i++) {
+                const option = <HTMLOptionElement> document.createElement("option");
+                option.setAttribute("value", `${i}`);
+                option.textContent = `${campo.values[i]}`;
+                input.append(option);
+            }
+            break;
+        }
+        case ("textarea"): {
+            const input = <HTMLTextAreaElement> document.createElement("textarea");
+            input.classList.add("form-control");
+            input.setAttribute("placeholder", placeholderText);
+            inputDiv.append(input);
+            break;
+        }
+        
+        default: {
+            const input = <HTMLInputElement> document.createElement("input");
+            input.classList.add("form-control");
+            input.setAttribute("type", campo.type);
+            input.setAttribute("placeholder", placeholderText);
+            inputDiv.append(input);
+            break;
+        }
+
+    }
+    return inputDiv;
+}
