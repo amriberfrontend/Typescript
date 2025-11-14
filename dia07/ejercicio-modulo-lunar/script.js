@@ -1,49 +1,3 @@
-var Origen = ["Ígneas", "Metamórficas", "Sedimentarias"];
-var TamanyoGrano = ["Muy grueso", "Grueso", "Medio", "Fino"];
-var Clasificacion = ["Construcción", "Ornamental", "Utensilios", "Machacada"];
-var Textura = ["Vitrea", "Afanítica", "Fanerítica"];
-var entradaReducida = false;
-var mineralForm = document.getElementById("mineral-form");
-var toggleLayoutBtn = document.getElementById("toggle-layout");
-toggleLayoutBtn.addEventListener("click", function () {
-    entradaReducida = !entradaReducida;
-    if (entradaReducida) {
-        generarFormularioReducido(fields);
-    }
-    else {
-        generarFormularioExtendido(fields);
-    }
-});
-var fields = [
-    { label: "ID del mineral", type: "text", values: [] },
-    { label: "Nombre del mineral", type: "text", values: [] },
-    { label: "Grupo", type: "select", values: Origen },
-    { label: "Dureza", type: "number", values: [0, 10] },
-    { label: "Tamaño del grano", type: "select", values: TamanyoGrano },
-    { label: "Clasificación", type: "select", values: Clasificacion },
-    { label: "Tamaño de los cristales", type: "number", values: [0, 10] },
-    { label: "Temperatura de formación", type: "number", values: [-100, 100] },
-    { label: "Estructura", type: "textarea", values: [] },
-    { label: "Forma de los granos", type: "textarea", values: [] },
-    { label: "Textura", type: "select", values: Textura }
-];
-generarFormularioExtendido(fields);
-var Mineral = /** @class */ (function () {
-    function Mineral(id, nombre, grupo, dureza, tamanyoGrano, clasificacion, tamanyoCristales, temperaturaFormacion, estructura, formaGranos, textura) {
-        this.id = id;
-        this.nombre = nombre;
-        this.grupo = grupo;
-        this.dureza = dureza;
-        this.tamanyoGrano = tamanyoGrano;
-        this.clasificacion = clasificacion;
-        this.tamanyoCristales = tamanyoCristales;
-        this.temperaturaFormacion = temperaturaFormacion;
-        this.estructura = estructura;
-        this.formaGranos = formaGranos;
-        this.textura = textura;
-    }
-    return Mineral;
-}());
 var Astronauta = /** @class */ (function () {
     function Astronauta(id, nombre, edad) {
         this.id = id;
@@ -61,115 +15,99 @@ var Astronauta = /** @class */ (function () {
     };
     return Astronauta;
 }());
-function generarFormularioReducido(campos) {
-    mineralForm.innerHTML = "";
-    for (var _i = 0, campos_1 = campos; _i < campos_1.length; _i++) {
-        var campo = campos_1[_i];
-        var campoDiv = document.createElement("div");
-        campoDiv.classList.add("mb-3");
-        mineralForm.append(campoDiv);
-        var inputDiv = document.createElement("div");
-        inputDiv.classList.add("col-9", "mx-auto", "mineral-form__input-container");
-        campoDiv.append(inputDiv);
-        switch (campo.type) {
-            case ("number"): {
-                var input = document.createElement("input");
-                input.classList.add("form-control");
-                input.setAttribute("type", "number");
-                input.setAttribute("placeholder", campo.label);
-                inputDiv.append(input);
-                if (campo.values.length > 0) {
-                    input.setAttribute("min", "".concat(campo.values[0]));
-                    input.setAttribute("max", "".concat(campo.values[1]));
-                }
-                break;
-            }
-            case ("select"): {
-                var input = document.createElement("select");
-                input.classList.add("form-select");
-                input.setAttribute("placeholder", campo.label);
-                inputDiv.append(input);
-                var option = document.createElement("option");
-                option.setAttribute("selected", "true");
-                option.textContent = "".concat(campo.label);
-                input.append(option);
-                for (var i = 0; i < campo.values.length; i++) {
-                    var option_1 = document.createElement("option");
-                    option_1.setAttribute("value", "".concat(i));
-                    option_1.textContent = "".concat(campo.values[i]);
-                    input.append(option_1);
-                }
-                break;
-            }
-            case ("textarea"): {
-                var input = document.createElement("textarea");
-                input.classList.add("form-control");
-                input.setAttribute("placeholder", campo.label);
-                inputDiv.append(input);
-                break;
-            }
-            default: {
-                var input = document.createElement("input");
-                input.classList.add("form-control");
-                input.setAttribute("type", campo.type);
-                input.setAttribute("placeholder", campo.label);
-                inputDiv.append(input);
-                break;
-            }
-        }
+var Origen;
+(function (Origen) {
+    Origen[Origen["IGNEA"] = 0] = "IGNEA";
+    Origen[Origen["METAMORFICA"] = 1] = "METAMORFICA";
+    Origen[Origen["SEDIMENTARIA"] = 2] = "SEDIMENTARIA";
+})(Origen || (Origen = {}));
+var TamanyoGrano;
+(function (TamanyoGrano) {
+    TamanyoGrano[TamanyoGrano["MUY_GRUESO"] = 0] = "MUY_GRUESO";
+    TamanyoGrano[TamanyoGrano["GRUESO"] = 1] = "GRUESO";
+    TamanyoGrano[TamanyoGrano["MEDIO"] = 2] = "MEDIO";
+    TamanyoGrano[TamanyoGrano["FINO"] = 3] = "FINO";
+})(TamanyoGrano || (TamanyoGrano = {}));
+var Clasificacion;
+(function (Clasificacion) {
+    Clasificacion[Clasificacion["CONSTRUCCION"] = 0] = "CONSTRUCCION";
+    Clasificacion[Clasificacion["ORNAMENTAL"] = 1] = "ORNAMENTAL";
+    Clasificacion[Clasificacion["UTENSILIOS"] = 2] = "UTENSILIOS";
+    Clasificacion[Clasificacion["MACHACADA"] = 3] = "MACHACADA";
+})(Clasificacion || (Clasificacion = {}));
+var Textura;
+(function (Textura) {
+    Textura[Textura["VITREA"] = 0] = "VITREA";
+    Textura[Textura["AFANITICA"] = 1] = "AFANITICA";
+    Textura[Textura["FANERITICA"] = 2] = "FANERITICA";
+})(Textura || (Textura = {}));
+var Mineral = /** @class */ (function () {
+    function Mineral(
+    // public id: string,
+    // public nombre: string,
+    grupo, 
+    // public dureza: number,
+    tamanyoGrano, 
+    // public clasificacion: Clasificacion,
+    // public tamanyoCristales: number,
+    // public temperaturaFormacion: number,
+    // public estructura: string,
+    // public formaGranos: string,
+    textura) {
+        this.grupo = grupo;
+        this.tamanyoGrano = tamanyoGrano;
+        this.textura = textura;
     }
+    Mineral.prototype.dameGrupo = function () {
+        return this.grupo;
+    };
+    Mineral.prototype.dameTamanyoGrano = function () {
+        return this.tamanyoGrano;
+    };
+    Mineral.prototype.dameTextura = function () {
+        return this.textura;
+    };
+    return Mineral;
+}());
+console.log("inicio script");
+var toggleLayoutCheckBox = document.getElementById("toggle-layout");
+var formularioContainer = document.getElementById("formulario-container");
+var comprobarBtn = document.getElementById("comprobar");
+mostrarFormularioExtendido();
+toggleLayoutCheckBox.addEventListener("click", function () {
+    formularioContainer.innerHTML = "";
+    if (toggleLayoutCheckBox.checked) {
+        mostrarFormularioReducido();
+    }
+    else {
+        mostrarFormularioExtendido();
+    }
+});
+comprobarBtn.addEventListener("click", function () {
+    var _a;
+    var iframe = document.getElementById('formulario-iframe');
+    var innerDoc = iframe.contentDocument || ((_a = iframe.contentWindow) === null || _a === void 0 ? void 0 : _a.document);
+    console.log("recibiendo selects");
+    var grupoMineralSelect = innerDoc.getElementById("grupo-mineral");
+    var tamanyoGranoSelect = innerDoc.getElementById("tamanyo-grano-mineral");
+    var texturaSelect = innerDoc.getElementById("textura-mineral");
+    console.log("asignando valores");
+    var mineral = new Mineral(grupoMineralSelect.selectedIndex, tamanyoGranoSelect.selectedIndex, texturaSelect.selectedIndex);
+    console.log(mineral.dameGrupo());
+});
+function mostrarFormularioExtendido() {
+    var formulario = document.createElement("iframe");
+    formulario.setAttribute("src", "./formulario-extendido.html");
+    formulario.setAttribute("id", "formulario-iframe");
+    formulario.style.width = "100%";
+    formulario.style.height = "500px";
+    formularioContainer.append(formulario);
 }
-function generarFormularioExtendido(campos) {
-    mineralForm.innerHTML = "";
-    for (var _i = 0, campos_2 = campos; _i < campos_2.length; _i++) {
-        var campo = campos_2[_i];
-        var campoDiv = document.createElement("div");
-        campoDiv.classList.add("mb-3", "row");
-        mineralForm.append(campoDiv);
-        var label = document.createElement("label");
-        label.classList.add("col-3", "col-form-label", "text-end", "mineral-form__label");
-        label.textContent = campo.label + ":";
-        campoDiv.append(label);
-        var inputDiv = document.createElement("div");
-        inputDiv.classList.add("col-9", "mineral-form__input-container");
-        campoDiv.append(inputDiv);
-        switch (campo.type) {
-            case ("number"): {
-                var input = document.createElement("input");
-                input.classList.add("form-control");
-                input.setAttribute("type", "number");
-                inputDiv.append(input);
-                if (campo.values.length > 0) {
-                    input.setAttribute("min", "".concat(campo.values[0]));
-                    input.setAttribute("max", "".concat(campo.values[1]));
-                }
-                break;
-            }
-            case ("select"): {
-                var input = document.createElement("select");
-                input.classList.add("form-select");
-                inputDiv.append(input);
-                for (var i = 0; i < campo.values.length; i++) {
-                    var option = document.createElement("option");
-                    option.setAttribute("value", "".concat(i));
-                    option.textContent = "".concat(campo.values[i]);
-                    input.append(option);
-                }
-                break;
-            }
-            case ("textarea"): {
-                var input = document.createElement("textarea");
-                input.classList.add("form-control");
-                inputDiv.append(input);
-                break;
-            }
-            default: {
-                var input = document.createElement("input");
-                input.classList.add("form-control");
-                input.setAttribute("type", campo.type);
-                inputDiv.append(input);
-                break;
-            }
-        }
-    }
+function mostrarFormularioReducido() {
+    var formulario = document.createElement("iframe");
+    formulario.setAttribute("src", "./formulario-reducido.html");
+    formulario.setAttribute("id", "formulario-iframe");
+    formulario.style.width = "100%";
+    formulario.style.height = "500px";
+    formularioContainer.append(formulario);
 }
