@@ -10,6 +10,21 @@
         <div class="col-11 mx-auto">
             <form id="mineral-form">
                 <div class="mb-3 row">
+                    <label for="identificador-mineral" class="col-form-label col-sm-3 text-end">Identificador:</label>
+                    <div class="col-sm-8">
+                        <input class="form-control" id="identificador-mineral" required>
+                        <div class="invalid-feedback">
+                            Formato no válido
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label for="nombre-mineral" class="col-form-label col-sm-3 text-end">Nombre:</label>
+                    <div class="col-sm-8">
+                        <input class="form-control" id="nombre-mineral" >
+                    </div>
+                </div>
+                <div class="mb-3 row">
                     <label for="grupo-mineral" class="col-form-label col-sm-3 text-end">Grupo</label>
                     <div class="col-sm-8">
                         <select class="form-select" id="grupo-mineral">
@@ -17,6 +32,12 @@
                             <option value="1">Metamórfica</option>
                             <option value="2">Sedimentaria</option>
                         </select>
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label for="dureza-mineral" class="col-form-label col-sm-3 text-end">Dureza:</label>
+                    <div class="col-sm-8">
+                        <input type="number" min="1" max="10" class="form-control" id="dureza-mineral">
                     </div>
                 </div>
                 <div class="mb-3 row">
@@ -28,6 +49,41 @@
                             <option value="2">Medio</option>
                             <option value="3">Fino</option>
                         </select>
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label for="clasificacion-mineral" class="col-form-label col-sm-3 text-end">Clasificación</label>
+                    <div class="col-sm-8">
+                        <select class="form-select" id="clasificacion-mineral">
+                            <option value="0">Construcción</option>
+                            <option value="1">Ornamental</option>
+                            <option value="2">Utensilios</option>
+                            <option value="3">Machacar</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label for="tamanyo-cristales-mineral" class="col-form-label col-sm-3 text-end">Tamaño de los cristales:</label>
+                    <div class="col-sm-8">
+                        <input type="number" min="0" max="10" class="form-control" id="tamanyo-cristales-mineral">
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label for="temperatura-formacion-mineral" class="col-form-label col-sm-3 text-end">Temperatura de formación:</label>
+                    <div class="col-sm-8">
+                        <input type="number" min="-100" max="100" class="form-control" id="temperatura-formacion-mineral">
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label for="estructura-mineral" class="col-form-label col-sm-3 text-end">Estructura:</label>
+                    <div class="col-sm-8">
+                        <textarea class="form-control" id="estructura-mineral"></textarea>
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label for="forma-grano-mineral" class="col-form-label col-sm-3 text-end">Forma de grano:</label>
+                    <div class="col-sm-8">
+                        <textarea class="form-control" id="forma-grano-mineral"></textarea>
                     </div>
                 </div>
                 <div class="mb-3 row">

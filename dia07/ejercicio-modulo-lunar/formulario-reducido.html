@@ -10,12 +10,27 @@
         <div class="col-11 mx-auto">
             <form id="mineral-form">
                 <div class="mb-3 form-floating">
+                    <input class="form-control" id="identificador-mineral" required>
+                    <label for="identificador-mineral">Identificador</label>
+                    <div class="invalid-feedback">
+                        Formato no válido
+                    </div>
+                </div>
+                <div class="mb-3 form-floating">
+                    <input class="form-control" id="nombre-mineral">
+                    <label for="nombre-mineral">Nombre</label>
+                </div>
+                <div class="mb-3 form-floating">
                     <select class="form-select" id="grupo-mineral">
                         <option value="0">Ígnea</option>
                         <option value="1">Metamórfica</option>
                         <option value="2">Sedimentaria</option>
                     </select>
                     <label for="grupo-mineral">Grupo</label>
+                </div>
+                <div class="mb-3 form-floating">
+                    <input type="number" min="1" max="10" class="form-control" id="dureza-mineral">
+                    <label for="dureza-mineral">Dureza</label>
                 </div>
                 <div class="mb-3 form-floating">
                     <select class="form-select" id="tamanyo-grano-mineral">
@@ -25,6 +40,31 @@
                         <option value="3">Fino</option>
                     </select>
                     <label for="tamanyo-grano-mineral">Tamaño de grano</label>
+                </div>
+                <div class="mb-3 form-floating">
+                    <select class="form-select" id="clasificacion-mineral">
+                        <option value="0">Construcción</option>
+                        <option value="1">Ornamental</option>
+                        <option value="2">Utensilios</option>
+                        <option value="3">Machacar</option>
+                    </select>
+                    <label for="clasificacion-mineral">Clasificación</label>
+                </div>
+                <div class="mb-3 form-floating">
+                    <input type="number" min="0" max="10" class="form-control" id="tamanyo-cristales-mineral">
+                    <label for="tamanyo-cristales-mineral">Tamaño de los cristales</label>
+                </div>
+                <div class="mb-3 form-floating">
+                    <input type="number" min="-100" max="100" class="form-control" id="temperatura-formacion-mineral">
+                    <label for="temperatura-formacion-mineral">Temperatura de formación</label>
+                </div>
+                <div class="mb-3 form-floating">
+                    <textarea class="form-control" id="estructura-mineral"></textarea>
+                    <label for="estructura-mineral">Estructura</label>
+                </div>
+                <div class="mb-3 form-floating">
+                    <textarea class="form-control" id="forma-grano-mineral"></textarea>
+                    <label for="forma-grano-mineral">Forma de los granos</label>
                 </div>
                 <div class="mb-3 form-floating">
                     <select class="form-select" id="textura-mineral">

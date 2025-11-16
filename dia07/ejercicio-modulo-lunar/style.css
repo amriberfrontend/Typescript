@@ -1,0 +1,20 @@
+html {
+  height: 100%;
+}
+
+body {
+  height: 100%;
+}
+
+main {
+  height: 100%;
+}
+
+.contenido-principal {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.contenido-principal__iframe {
+  flex-grow: 1;
+}/*# sourceMappingURL=style.css.map */
